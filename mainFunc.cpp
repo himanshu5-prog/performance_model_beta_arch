@@ -1,10 +1,14 @@
 #include "stats.h"
+#include "instruction.h"
 
 int main(){
-    Statistics cycleCount (23, "This stats shows the total cycle count\n");
+    Stat stat = createStatistics();
+    cout << "statistic:\n";
+    stat.print();
 
-    float f = cycleCount.getValue();
+    InstCollection instList = createInstructionList();
+    cout << "Instructions: \n";
+    instList.print();
 
-    cout << "f: " << f << "\n"; 
-    cout << "info: " << cycleCount.getInfo() << "\n";
+    return 0;
 }

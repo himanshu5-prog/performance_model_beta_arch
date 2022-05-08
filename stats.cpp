@@ -1,5 +1,6 @@
 #include "stats.h"
 
+//-------------------------------------------
 Statistics ::Statistics(){
     this -> value = 0;
     this -> info = "NA";
@@ -21,6 +22,19 @@ string Statistics :: getInfo (){
 
 string Statistics :: getName (){
     return this->name;
+}
+//----------------------------------------------
+void Stat :: print (){
+    map <string, Statistics> :: iterator itr;
+    string name;
+    Statistics s;
+
+    for (itr= st.begin(); itr != st.end(); itr++){
+        name = itr -> first;
+        s = itr ->second;
+
+        cout << name << " : " << s.getValue() << " , " << s.getInfo() << "\n";
+    }
 }
 
 Stat createStatistics (){

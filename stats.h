@@ -31,6 +31,7 @@ class Stat {
         void add(string name, Statistics s){
             st.insert (  {name,s});
         }
+        void print();
 };
 
 Stat createStatistics ();
