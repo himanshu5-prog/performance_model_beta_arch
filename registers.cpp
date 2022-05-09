@@ -47,6 +47,12 @@ RegisterFile createRegisters(){
     rf.changeRegInfo("R31", "This reg is always 0");
     rf.changeReserveBit("R30", true);
 
+    reg.reserved = true;
+    reg.name = "PC";
+    reg.value = 0;
+    reg.info = "This reg is Program Counter.";
+
+    rf.add(reg.name, reg);
     return rf;
 
 }

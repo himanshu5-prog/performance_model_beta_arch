@@ -15,6 +15,5 @@ int main(){
     cout << " Registers:\n";
     regFile.print();
 
-
     return 0;
 }
