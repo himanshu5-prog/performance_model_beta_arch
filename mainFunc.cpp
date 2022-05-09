@@ -1,5 +1,6 @@
 #include "stats.h"
 #include "instruction.h"
+#include "registers.h"
 
 int main(){
     Stat stat = createStatistics();
@@ -9,6 +10,11 @@ int main(){
     InstCollection instList = createInstructionList();
     cout << "Instructions: \n";
     instList.print();
+
+    RegisterFile regFile = createRegisters();
+    cout << " Registers:\n";
+    regFile.print();
+
 
     return 0;
 }
