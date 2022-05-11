@@ -17,6 +17,18 @@ void InstCollection :: add (string name, Instruction i){
     inst.insert ( {name,i});
 }
 
+bool InstCollection :: find (string name){
+    if ( inst.find(name) != inst.end())
+        return true;
+    return false;
+}
+
+int InstCollection :: getOpcode (string name){
+    assert ( this->find(name));
+
+    return inst[name].opcode;
+}
+
 void InstCollection :: print(){
     map <string, Instruction> :: iterator itr;
     string name;

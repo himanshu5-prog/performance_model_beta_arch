@@ -2,6 +2,7 @@
 #define _INST_
 #include<iostream>
 #include<map>
+#include<cassert>
 
 using namespace std;
 
@@ -41,6 +42,8 @@ class InstCollection {
             inst.insert( {name, instr}  );
         }
         void add (string name, Instruction instr);
+        bool find (string name);
+        int getOpcode(string name);
         void print();
 };
 // Instruction Set Architecture data structure----

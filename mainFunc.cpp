@@ -1,6 +1,7 @@
 #include "stats.h"
 #include "instruction.h"
 #include "registers.h"
+#include "benchmark.h"
 
 int main(){
     Stat stat = createStatistics();
@@ -15,5 +16,7 @@ int main(){
     cout << " Registers:\n";
     regFile.print();
 
+    string fileName = "benchmark/simple_b.txt";
+    Benchmark B = createBenchmark(fileName, instList);
     return 0;
 }

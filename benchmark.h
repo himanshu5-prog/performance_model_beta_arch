@@ -4,7 +4,12 @@
 #include<iostream>
 #include<map>
 #include <cassert>
+#include <fstream>
+#include<string>
+#include<vector>
+#include "instruction.h"
 using namespace std;
+
 enum SourceType {NONE, REG, LITERAL};
 typedef enum SourceType sourceType;
 
@@ -30,5 +35,5 @@ class Benchmark {
         BenchElem getBenchElem (int pc);
 };
 
-Benchmark createBenchmark ( string fileName);
+Benchmark createBenchmark ( string fileName, InstCollection instList);
 #endif
