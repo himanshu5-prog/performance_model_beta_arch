@@ -13,6 +13,15 @@ using namespace std;
 enum SourceType {NONE, REG, LITERAL};
 typedef enum SourceType sourceType;
 
+struct benchStruct {
+    string opcode;
+    string source1;
+    string source2;
+    string dest;
+    sourceType type1;
+    sourceType type2;
+};
+
 class BenchElem {
     string opcode;
     string source1;
@@ -25,15 +34,22 @@ class BenchElem {
         BenchElem();
         BenchElem (string opcode, string source1, string source2, string dest, sourceType type1, sourceType type2);
         void print();
+        benchStruct getBenchStruct();
 };
 
 class Benchmark {
     map <int, BenchElem> benchmark;
+    int startAddr;
+    int endAddr;
     public:
         Benchmark() = default;
         void add (int pc, BenchElem b);
         bool find (int pc);
         void print();
+        void setAddr (int sa, int ea);
+        int getStartAddr();
+        int getEndAddr();
+        benchStruct getBenchStruct(int pc);
         BenchElem getBenchElem (int pc);
 };
 

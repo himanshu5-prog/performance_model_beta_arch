@@ -23,6 +23,10 @@ string Statistics :: getInfo (){
 string Statistics :: getName (){
     return this->name;
 }
+
+void Statistics :: incrementVal(int v){
+    value += float(v);
+}
 //----------------------------------------------
 void Stat :: print (){
     map <string, Statistics> :: iterator itr;
@@ -37,6 +41,18 @@ void Stat :: print (){
     }
 }
 
+bool Stat :: find ( string name){
+    if ( st.find(name) != st.end())
+        return true;
+    return false;
+}
+
+void Stat :: incrementStat (string name, int v){
+    assert (find(name) == true);
+
+    st[name].incrementVal(v);
+    
+}
 Stat createStatistics (){
     Stat statList;
     // Total cycle count

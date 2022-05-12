@@ -24,6 +24,16 @@ void BenchElem :: print (){
     cout << "opcode: " << opcode << ", source1: " << source1 << ", source1 type: " << type1 << ", source2: "
     << source2 << ", source2 type: " << type2 <<", dest: " << dest << "\n";
 }
+
+benchStruct BenchElem :: getBenchStruct(){
+    benchStruct answer;
+    answer.opcode = opcode;
+    answer.source1 = source1;
+    answer.source2 = source2;
+    answer.type1 = type1;
+    answer.type2 = type2;
+    answer.dest = dest;
+}
 //-----------------------------------------------------------------------------------------------
 // Benchmark class function-----------------
 void Benchmark :: add (int pc, BenchElem b){
@@ -47,12 +57,30 @@ void Benchmark :: print(){
     map <int, BenchElem> :: iterator itr;
     int pc;
     BenchElem B;
+    cout << "Benchmark start address: " << getStartAddr() << " end address: " << getEndAddr() << "\n"; 
     for (itr = benchmark.begin(); itr != benchmark.end(); itr++){
         pc = itr->first;
         B = itr->second;
         cout <<" pc: " << pc << " ";
         B.print();
     }
+}
+
+void Benchmark :: setAddr (int sa, int ea){
+    startAddr = sa;
+    endAddr = ea;
+}
+
+int Benchmark :: getStartAddr(){
+    return startAddr;
+}
+
+int Benchmark :: getEndAddr(){
+    return endAddr;
+}
+
+benchStruct Benchmark :: getBenchStruct(int pc){
+    return benchmark[pc].getBenchStruct();
 }
 //--------------------------------------------
 void printStringVect ( vector <string> v){
@@ -91,11 +119,12 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
     vector <string> strVect;
     pc = 0;
     int op;
-
+    int startBenchAddr, endBenchAddr;
     string opcode;
     string source1, source2, dest;
     sourceType t1, t2;
 
+    startBenchAddr = 0;
     if (ip.is_open()){
         string str;
         while( getline(ip,str)){
@@ -141,10 +170,12 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
             BenchElem Bm (opcode, source1, source2, dest, t1, t2);
             
             B.add(pc, Bm);
+            endBenchAddr = pc;
             pc += 4;
 
         }
     }
+    B.setAddr(startBenchAddr, endBenchAddr);
     ip.close();
     return B;
 }

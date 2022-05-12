@@ -5,6 +5,7 @@
 #include<cstring>
 #include<vector>
 #include<map>
+#include<cassert>
 using namespace std;
 
 class Statistics {
@@ -18,6 +19,7 @@ class Statistics {
         float getValue();
         string getName();
         string getInfo();
+        void incrementVal (int v);
 };
 
 class Stat {
@@ -31,6 +33,8 @@ class Stat {
         void add(string name, Statistics s){
             st.insert (  {name,s});
         }
+        bool find (string name);
+        void incrementStat(string name, int v);
         void print();
 };
 
