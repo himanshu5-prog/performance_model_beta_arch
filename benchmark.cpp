@@ -33,6 +33,7 @@ benchStruct BenchElem :: getBenchStruct(){
     answer.type1 = type1;
     answer.type2 = type2;
     answer.dest = dest;
+    return answer;
 }
 //-----------------------------------------------------------------------------------------------
 // Benchmark class function-----------------
