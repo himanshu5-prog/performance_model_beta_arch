@@ -19,6 +19,11 @@ BenchElem :: BenchElem (string op, string s1, string s2, string d, sourceType t1
     type1 = t1;
     type2 = t2;
 }
+
+void BenchElem :: print (){
+    cout << "opcode: " << opcode << ", source1: " << source1 << ", source1 type: " << type1 << ", source2: "
+    << source2 << ", source2 type: " << type2 <<", dest: " << dest << "\n";
+}
 //-----------------------------------------------------------------------------------------------
 // Benchmark class function-----------------
 void Benchmark :: add (int pc, BenchElem b){
@@ -36,6 +41,18 @@ BenchElem Benchmark :: getBenchElem (int pc){
     assert ( find(pc));
     return benchmark[pc];
 
+}
+
+void Benchmark :: print(){
+    map <int, BenchElem> :: iterator itr;
+    int pc;
+    BenchElem B;
+    for (itr = benchmark.begin(); itr != benchmark.end(); itr++){
+        pc = itr->first;
+        B = itr->second;
+        cout <<" pc: " << pc << " ";
+        B.print();
+    }
 }
 //--------------------------------------------
 void printStringVect ( vector <string> v){
@@ -73,14 +90,59 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
     ip.open(fileName, ios::in); 
     vector <string> strVect;
     pc = 0;
+    int op;
+
+    string opcode;
+    string source1, source2, dest;
+    sourceType t1, t2;
+
     if (ip.is_open()){
         string str;
         while( getline(ip,str)){
             strVect = sepLine(str);
-            cout << str << "\n";
-            printStringVect(strVect);
+            //cout << str << "\n";
+            //printStringVect(strVect);
             assert(instCollection.find(strVect[0]));
-            cout << "opcode: " << instCollection.getOpcode(strVect[0]) << "\n";
+            op = instCollection.getOpcode(strVect[0]);
+            //cout << "opcode: " << instCollection.getOpcode(strVect[0]) << "\n";
+            opcode = strVect[0];
+
+            if ( op == 27 ){
+                //JMP instruction
+                t1 = REG;
+                assert(strVect.size() == 3);
+                source1 = strVect[1];
+                t2 = NONE;
+                source2 = "NONE";
+                dest = strVect[2];
+            } else if ( op >> 4 == 3){
+                // The instruction has literal as one of the source
+                t1 = REG;
+                assert(strVect.size() == 4);
+                source1 = strVect[1];
+                t1 = REG;
+
+                source2 = strVect[2];
+                t2 = LITERAL;
+
+                dest = strVect[3];
+            } else {
+                // Instructions have both sources as registers
+                assert (strVect.size() == 4);
+                t1 = REG;
+                source1 = strVect[1];
+
+                t2 = REG;
+                source2 = strVect[2];
+                
+                dest = strVect[3];
+            }
+
+            BenchElem Bm (opcode, source1, source2, dest, t1, t2);
+            
+            B.add(pc, Bm);
+            pc += 4;
+
         }
     }
     ip.close();

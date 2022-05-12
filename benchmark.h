@@ -24,6 +24,7 @@ class BenchElem {
     public:
         BenchElem();
         BenchElem (string opcode, string source1, string source2, string dest, sourceType type1, sourceType type2);
+        void print();
 };
 
 class Benchmark {
@@ -32,6 +33,7 @@ class Benchmark {
         Benchmark() = default;
         void add (int pc, BenchElem b);
         bool find (int pc);
+        void print();
         BenchElem getBenchElem (int pc);
 };
 
