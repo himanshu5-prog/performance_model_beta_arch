@@ -74,7 +74,9 @@ Stat createStatistics (){
     Statistics storeInstCount ("storeInstCount", 0, "This stat refers to store instruction count.");
     statList.add(storeInstCount.getName(), storeInstCount);
 
-
+    Statistics totalInst ("totalInstCount", 0, "This stat refers to total instruction count in benchmark");
+    statList.add(totalInst.getName(), totalInst);
+    
     return statList;
 
     
