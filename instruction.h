@@ -44,6 +44,7 @@ class InstCollection {
         void add (string name, Instruction instr);
         bool find (string name);
         int getOpcode(string name);
+        int getLatency (string name);
         void print();
 };
 // Instruction Set Architecture data structure----

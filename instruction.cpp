@@ -23,6 +23,13 @@ bool InstCollection :: find (string name){
     return false;
 }
 
+int InstCollection :: getLatency (string name){
+    assert ( find(name));
+
+    return inst[name].latency;
+
+}
+
 int InstCollection :: getOpcode (string name){
     assert ( this->find(name));
 
