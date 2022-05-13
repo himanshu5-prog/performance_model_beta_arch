@@ -40,6 +40,9 @@ using namespace std;
             reg[name].value = value;
         }
         int readReg(string name){
+            assert(name.length() > 0);
+            if (!findReg(name))
+                cout << " Error: Reg " << name << " is  not found\n";
             assert(findReg(name));
             return reg[name].value;
         }
