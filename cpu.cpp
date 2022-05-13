@@ -76,7 +76,85 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             temp = regFile.readReg(reg1_id) + literal;
             mem_data = memory.getValue(temp);
             regFile.changeRegValue(dest,mem_data);
+
+        } else if (opcode == "ST"){
+            literal = stoi(source2);
+            reg1_id = source1;
+            assert(regFile.findReg(reg1_id));
+            //Address calculation
+            temp = regFile.readReg(dest) + literal;
+
+            memory.store(temp, regFile.readReg(reg1_id));
+
+        } else if (instID >> 4 == 3){
+
+            assert (t2 == LITERAL);
+            literal = stoi(source2);
+            assert (t1 == REG);
+            if (opcode == "ADDC"){
+                temp = regFile.readReg(source1) + literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "ANDC"){
+                temp = regFile.readReg(source1) & literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "CMPEQC"){
+                if ( regFile.readReg(source1) == literal){
+                    regFile.changeRegValue(dest,1);
+                } else
+                    regFile.changeRegValue(dest,0);
+
+            } else if ( opcode == "CMPLEC"){
+                if ( regFile.readReg(source1) <= literal){
+                    regFile.changeRegValue(dest,1);
+                } else {
+                    regFile.changeRegValue(dest,0);
+                }
+
+            } else if ( opcode == "CMPLTC"){
+                if ( regFile.readReg(source1) < literal){
+                    regFile.changeRegValue(dest,1);
+                } else {
+                    regFile.changeRegValue(dest,0);
+                }
+            } else if ( opcode == "DIVC"){
+                temp = regFile.readReg(source1)/literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "MULC"){
+                temp = regFile.readReg(source1) * literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "ORC"){
+                temp = regFile.readReg(source1) | literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "SHLC"){
+                literal = literal & 0x1F;
+                temp = regFile.readReg(source1) << literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "SHRC" || opcode == "SRAC"){
+                literal = literal & 0x1F;
+                temp = regFile.readReg(source1) >> literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "SUBC"){
+                temp = regFile.readReg(source1) - literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "XORC"){
+                temp = regFile.readReg(source1) ^ literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "XNORC"){
+                temp = ~(regFile.readReg(source1) ^ literal);
+                regFile.changeRegValue(dest, temp);
+
+            }
         }
+
         i += 4;
     }
 }
