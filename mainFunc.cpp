@@ -7,9 +7,10 @@
 
 int main(){
     Stat stat = createStatistics();
+    /*
     cout << "statistic:\n";
     stat.print();
-    
+    */
     
     InstCollection instList = createInstructionList();
     //instList.print();
@@ -34,12 +35,16 @@ int main(){
     //--------------------------------------
     // CPU definittion----------------------
     CPU cpu (instList, regFile, Mem);
+    cpu.runBenchmark(B, stat);
     /*
     cout << "instruction set architecture\n";
     cpu.printInstCollection();
+    */
     cout << " register file:\n";
     cpu.printRegFile();
-    */
+    
+    cout << "Stats:\n";
+    stat.print();
     //----------------------------------
     return 0;
 }

@@ -10,7 +10,9 @@
 class CPU {
     InstCollection instCollection;
     RegisterFile regFile;
-    Memory memory; 
+    Memory memory;
+    bool debugMode = true;
+
     public:
         CPU() = default;
         CPU (InstCollection i, RegisterFile r, Memory m){
