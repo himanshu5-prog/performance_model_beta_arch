@@ -5,16 +5,18 @@
 #include "stats.h"
 #include "registers.h"
 #include "benchmark.h"
+#include "memory.h"
 
 class CPU {
     InstCollection instCollection;
     RegisterFile regFile;
-    
+    Memory memory; 
     public:
         CPU() = default;
-        CPU (InstCollection i, RegisterFile r){
+        CPU (InstCollection i, RegisterFile r, Memory m){
             instCollection = i;
             regFile = r;
+            memory = m;
         }
         void printInstCollection();
         void printRegFile();

@@ -2,6 +2,7 @@
 #include "instruction.h"
 #include "registers.h"
 #include "benchmark.h"
+#include "memory.h"
 #include "cpu.h"
 
 int main(){
@@ -22,13 +23,23 @@ int main(){
 
     cout << "Benchmark:\n";
     B.print();
-    
+     
+    // Memory-------------------------------
+    Memory Mem;
+    Mem.createMem();
+    /*
+    cout << "Memory content\n:";
+    Mem.print();
+    */
+    //--------------------------------------
     // CPU definittion----------------------
-    CPU cpu (instList, regFile);
+    CPU cpu (instList, regFile, Mem);
+    /*
     cout << "instruction set architecture\n";
     cpu.printInstCollection();
     cout << " register file:\n";
     cpu.printRegFile();
+    */
     //----------------------------------
     return 0;
 }
