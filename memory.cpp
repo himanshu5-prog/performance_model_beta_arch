@@ -17,3 +17,22 @@ int Memory :: getValue(int addr){
     return mem[addr];
 
 }
+
+void Memory :: createMem(){
+    for (int i=0; i<64; i++){
+        add(i,0);
+    }
+}
+
+void Memory :: print(){
+    map <int, int> :: iterator itr;
+    cout << "addr  :  data\n";
+    for (itr = mem.begin(); itr != mem.end(); itr++){
+         cout << itr->first << " : " << itr->second << "\n";
+    }
+}
+
+void Memory :: store(int addr, int value){
+    assert (find(addr));
+    mem[addr] = value;
+}

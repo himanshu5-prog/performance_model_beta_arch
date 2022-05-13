@@ -13,6 +13,9 @@ class Memory {
         void add (int addr, int value);
         bool find (int addr);
         int getValue (int addr);
+        void store(int addr, int value);
+        void createMem();
+        void print();
 };
 
 #endif
