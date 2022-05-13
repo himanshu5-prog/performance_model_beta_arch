@@ -86,7 +86,11 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
 
             memory.store(temp, regFile.readReg(reg1_id));
 
-        } else if (instID >> 4 == 3){
+        } else if (opcode == "LDR"){
+            literal =  stoi(source1);
+            temp = pc + 4 + (4*literal);   
+            regFile.changeRegValue(dest, memory.getValue(temp)); 
+        }else if (instID >> 4 == 3){
 
             assert (t2 == LITERAL);
             literal = stoi(source2);
@@ -150,6 +154,69 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
 
             } else if ( opcode == "XNORC"){
                 temp = ~(regFile.readReg(source1) ^ literal);
+                regFile.changeRegValue(dest, temp);
+
+            }
+        } else {
+            //Instructions have both sources as register
+            if (opcode == "ADD"){
+                temp = regFile.readReg(source1) + regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "AND" ){
+                temp = regFile.readReg(source1) & regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "CMPEQ"){
+                if (regFile.readReg(source1) == regFile.readReg(source2)){
+                    temp = 1;
+                } else temp = 0;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "CMPLE"){
+                if (regFile.readReg(source1) <= regFile.readReg(source2)){
+                    temp = 1;
+                } else temp = 0;
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "CMPLT"){
+                if (regFile.readReg(source1) < regFile.readReg(source2)){
+                    temp = 1;
+                } else temp = 0;
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "DIV"){
+                temp = regFile.readReg(source1) / regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "MUL"){
+                temp = regFile.readReg(source1) * regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "OR"){
+                temp = regFile.readReg(source1) | regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "SHL"){
+                literal = regFile.readReg(source2) & 0x1F;
+                temp = regFile.readReg(source1) << literal;
+                regFile.changeRegValue(dest, temp);
+
+            } else if (opcode == "SHR" || opcode == "SRA"){
+                literal = regFile.readReg(source2) & 0x1F;
+                temp = regFile.readReg(source1) >> literal;
+                regFile.changeRegValue(dest, temp);
+                
+            } else if (opcode == "SUB"){
+                temp = regFile.readReg(source1) - regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "XOR"){
+                temp = regFile.readReg(source1) ^ regFile.readReg(source2);
+                regFile.changeRegValue(dest, temp);
+
+            } else if ( opcode == "XNOR"){
+                temp = ~(regFile.readReg(source1) ^ regFile.readReg(source2));
                 regFile.changeRegValue(dest, temp);
 
             }
