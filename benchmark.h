@@ -40,7 +40,7 @@ class BenchElem {
 class Benchmark {
     map <int, BenchElem> benchmark;
     int startAddr;
-    int endAddr;
+    int endAddr; 
     public:
         Benchmark() = default;
         void add (int pc, BenchElem b);

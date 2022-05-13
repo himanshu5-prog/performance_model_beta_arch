@@ -156,7 +156,15 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
                 t2 = LITERAL;
 
                 dest = strVect[3];
-            } else {
+            } else if (opcode == "LDR"){
+                t1 = LITERAL;
+                assert(strVect.size() == 3);
+                source1 = strVect[1];
+                t2 = NONE;
+                source2 = "NONE";
+                dest = strVect[2];   
+            } 
+            else {
                 // Instructions have both sources as registers
                 assert (strVect.size() == 4);
                 t1 = REG;
