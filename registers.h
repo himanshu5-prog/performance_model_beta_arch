@@ -39,6 +39,10 @@ using namespace std;
             assert (findReg(name));
             reg[name].value = value;
         }
+        int readReg(string name){
+            assert(findReg(name));
+            return reg[name].value;
+        }
         void print();
  };
 
