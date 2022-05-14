@@ -16,3 +16,9 @@ Following are the statistics which are generated:
 All benchmark files are in benchmark directory.
 
 The file name is provided in perf_model.cpp and it is provided as an argument for creating data structure for benchmark.
+
+Compiling th code:
+**source compile.tcl**
+
+Compile + run the code:
+**source run.tcl**
