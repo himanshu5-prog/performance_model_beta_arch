@@ -20,7 +20,8 @@ int main(){
     
 
     string fileName = "benchmark/simple_b.txt";
-    Benchmark B = createBenchmark(fileName, instList);
+    string fileName2 = "benchmark/ap.txt";
+    Benchmark B = createBenchmark(fileName2, instList);
 
     cout << "Benchmark:\n";
     B.print();

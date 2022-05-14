@@ -33,6 +33,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
         pc = i;
         cout << "CPU :: runBenchmark : PC: " << pc << "\n";
         if ( B.find(pc) == false){
+            cout << "Instruction with PC: " << pc << " not present\n";
             i += 4;
             continue;
         }
@@ -59,13 +60,18 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             pc_temp = pc + (4*literal);
             temp = regFile.readReg(reg1_id);
             regFile.changeRegValue(dest,pc);
+            
+            if (debugMode) cout << "CPU:: runBenchmark :: (BEQ/BNE) source1: " << source1 << "literal: " << literal << " dest: " << dest << " pc_temp: "
+              << pc_temp <<"\n";
 
             if (opcode == "BEQ"){
                 if (temp == 0){
+                    if (debugMode) cout << "Branch taken\n";
                     i = pc_temp;
                 }
             } else if ( opcode == "BNE"){
                 if (temp != 0){
+                    if (debugMode) cout << "Branch taken\n";
                     i = pc_temp;
                 }
             }
@@ -110,7 +116,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
 
             temp1 = regFile.readReg(source1);
             temp2 = literal;
-            if (debugMode) cout << "CPU :: runBenchmark :: source1: " << source1 << " literal: " << literal << " dest: " << dest << "\n";
+            if (debugMode) cout << "CPU :: runBenchmark :: opcode: " << opcode << " source1: " << source1 << " literal: " << literal << " dest: " << dest << "\n";
             if (opcode == "ADDC"){
                 temp = temp1 + temp2;
                 regFile.changeRegValue(dest, temp);
@@ -190,7 +196,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
         } else {
             //Instructions have both sources as register
             if (debugMode){
-                cout << "CPU :: runBenchmark :source1: " << source1 << " source2: " << source2 << " dest: " << dest<< endl;
+                cout << "CPU :: runBenchmark : opcode : " << opcode <<" source1: " << source1 << " source2: " << source2 << " dest: " << dest<< endl;
             }
             
             temp1 = regFile.readReg(source1);
@@ -273,6 +279,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             }
         }
         S.incrementStat("totalInstCount", 1);
+       // if (debugMode) cout << " i(before increment by 4): " << i << "\n";
         i += 4;
     }
     S.incrementStat("cycleCount", cycleCount);

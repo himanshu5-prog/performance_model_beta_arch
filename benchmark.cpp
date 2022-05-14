@@ -163,6 +163,14 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
                 t2 = NONE;
                 source2 = "NONE";
                 dest = strVect[2];   
+            } else if (opcode == "BEQ" || opcode == "BNE"){
+                assert(strVect.size() == 4);
+                source1 = strVect[1];
+                t1 = REG;
+                source2 = strVect[2];
+                t2 = LITERAL;
+                dest = strVect[3];
+
             } else if ( opcode == "ST"){
                 assert (strVect.size() == 4);
                 t1 = REG;
