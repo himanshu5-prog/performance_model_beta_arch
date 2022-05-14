@@ -12,3 +12,7 @@ Following are the statistics which are generated:
 5) loadInstCount: Number of load instructions executed
 6) storeInstCount: Number of store instructions executed
 7) totalInstCount: Total number of instructions executed
+
+All benchmark files are in benchmark directory.
+
+The file name is provided in perf_model.cpp and it is provided as an argument for creating data structure for benchmark.
