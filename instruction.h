@@ -47,16 +47,6 @@ class InstCollection {
         int getLatency (string name);
         void print();
 };
-// Instruction Set Architecture data structure----
-class ISA {
-    map <string, int> nameOpcodeMap;
-    map <int, string> opcodeNameMap;
-
-    public:
-        ISA(int op, string m);
-        void printISA ();
-
-};
 
 InstCollection createInstructionList ();
 //-------------------------------------------------
