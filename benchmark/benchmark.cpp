@@ -1,5 +1,5 @@
 #include "benchmark.h"
-#include "instruction.h"
+#include "../instruction/instruction.h"
 
 // BenchElem functio-----------------------------------------------------------------------------
 BenchElem :: BenchElem(){

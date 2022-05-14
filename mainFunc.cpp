@@ -1,9 +1,9 @@
-#include "stats.h"
-#include "instruction.h"
-#include "registers.h"
-#include "benchmark.h"
-#include "memory.h"
-#include "cpu.h"
+#include "stats/stats.h"
+#include "instruction/instruction.h"
+#include "register/registers.h"
+#include "benchmark/benchmark.h"
+#include "memory/memory.h"
+#include "cpu/cpu.h"
 
 int main(){
     Stat stat = createStatistics();
@@ -19,8 +19,8 @@ int main(){
     //regFile.print();
     
 
-    string fileName = "benchmark/simple_b.txt";
-    string fileName2 = "benchmark/ap.txt";
+    string fileName = "benchmarkFiles/simple_b.txt";
+    string fileName2 = "benchmarkFiles/ap.txt";
     Benchmark B = createBenchmark(fileName2, instList);
 
     cout << "Benchmark:\n";

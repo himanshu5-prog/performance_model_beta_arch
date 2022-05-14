@@ -7,7 +7,7 @@
 #include <fstream>
 #include<string>
 #include<vector>
-#include "instruction.h"
+#include "../instruction/instruction.h"
 using namespace std;
 
 enum SourceType {NONE, REG, LITERAL};

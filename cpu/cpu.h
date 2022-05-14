@@ -1,11 +1,11 @@
 #ifndef _CPU_
 #define _CPU_
 
-#include "instruction.h"
-#include "stats.h"
-#include "registers.h"
-#include "benchmark.h"
-#include "memory.h"
+#include "../instruction/instruction.h"
+#include "../stats/stats.h"
+#include "../register/registers.h"
+#include "../benchmark/benchmark.h"
+#include "../memory/memory.h"
 
 class CPU {
     InstCollection instCollection;
