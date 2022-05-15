@@ -53,6 +53,8 @@ void Stat :: incrementStat (string name, int v){
     st[name].incrementVal(v);
     
 }
+
+//Adding statistics to stat data structure-------------------------------------------------------------
 Stat createStatistics (){
     Stat statList;
     // Total cycle count
@@ -77,7 +79,6 @@ Stat createStatistics (){
     Statistics totalInst ("totalInstCount", 0, "This stat refers to total instruction count in benchmark");
     statList.add(totalInst.getName(), totalInst);
     
-    return statList;
-
-    
+    return statList;  
 }
+//---------------------------------------------------------------------------------------------------------

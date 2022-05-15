@@ -11,7 +11,7 @@ void RegisterFile :: print (){
         cout << name << " : " << tempReg.value << " , " << tempReg.info << "\n";
     }
 }
-
+//Adding register to register file--------------------------------
 RegisterFile createRegisters(){
     RegisterFile rf;
     Register reg;
@@ -56,3 +56,4 @@ RegisterFile createRegisters(){
     return rf;
 
 }
+//----------------------------------------------------------------------------

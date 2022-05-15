@@ -1,13 +1,16 @@
 #include "cpu.h"
 
+//Function to print instruction collection
 void CPU::printInstCollection (){
     instCollection.print();
 }
-
+//----------------------------------------
+//Function to print register file---------
 void CPU :: printRegFile (){
     regFile.print();
 }
-
+//----------------------------------------
+//FUnction to run benchmark----------------------
 void CPU :: runBenchmark (Benchmark &B, Stat &S){
     int pc;
     BenchElem bm;
@@ -52,6 +55,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
         cycleCount += instCollection.getLatency(opcode);
 
         if (opcode == "BEQ" || opcode == "BNE"){
+            //Branch instruction
             reg1_id = source1;
             assert(regFile.findReg(reg1_id));
             literal = stoi(source2);
@@ -77,6 +81,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             }
             S.incrementStat("branchInstCount", 1);
         } else if ( opcode == "JMP") {
+            // Jump instruction
             temp = regFile.readReg(reg1_id);
             temp = (temp >> 2) << 2;
             regFile.changeRegValue(dest,pc+4);
@@ -84,6 +89,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             S.incrementStat("branchInstCount", 1);
 
         } else if (opcode == "LD"){
+            //Load instruction
             reg1_id = source1;
             assert (regFile.findReg(reg1_id));
             literal = stoi(source2);
@@ -93,6 +99,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             S.incrementStat("loadInstCount", 1);
 
         } else if (opcode == "ST"){
+            //Store instruction
             literal = stoi(source2);
             reg1_id = source1;
             assert(regFile.findReg(reg1_id));
@@ -103,6 +110,7 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             S.incrementStat("storeInstCount", 1);
 
         } else if (opcode == "LDR"){
+            //pc relative load
             literal =  stoi(source1);
             temp = pc + 4 + (4*literal);   
             regFile.changeRegValue(dest, memory.getValue(temp)); 
@@ -279,8 +287,8 @@ void CPU :: runBenchmark (Benchmark &B, Stat &S){
             }
         }
         S.incrementStat("totalInstCount", 1);
-       // if (debugMode) cout << " i(before increment by 4): " << i << "\n";
         i += 4;
     }
     S.incrementStat("cycleCount", cycleCount);
 }
+//---------------------------------------------------------------------------

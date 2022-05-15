@@ -1,7 +1,7 @@
 #include "benchmark.h"
 #include "../instruction/instruction.h"
 
-// BenchElem functio-----------------------------------------------------------------------------
+// BenchElem class constructor/function------------------------------------------------------------
 BenchElem :: BenchElem(){
     opcode = "";
     source1 = "";
@@ -36,24 +36,27 @@ benchStruct BenchElem :: getBenchStruct(){
     return answer;
 }
 //-----------------------------------------------------------------------------------------------
-// Benchmark class function-----------------
+// Benchmark class function----------------------------------------------------------------------
+//Function to add BenchElem to data structure
 void Benchmark :: add (int pc, BenchElem b){
     benchmark.insert( {pc, b});
 }
-
+//-------------------------------------------
+//Function to find BenchElem for pc address----
 bool Benchmark :: find(int pc){
     if ( benchmark.find(pc) != benchmark.end())
         return true;
     
     return false;
 }
-
+//---------------------------------------------
+//Function to get BenchElem struct for a pc address---
 BenchElem Benchmark :: getBenchElem (int pc){
     assert ( find(pc));
     return benchmark[pc];
 
 }
-
+//----------------------------------------------------
 void Benchmark :: print(){
     map <int, BenchElem> :: iterator itr;
     int pc;
@@ -67,10 +70,12 @@ void Benchmark :: print(){
     }
 }
 
+//Function to set start address and end address for benchmark---
 void Benchmark :: setAddr (int sa, int ea){
     startAddr = sa;
     endAddr = ea;
 }
+//--------------------------------------------------------------
 
 int Benchmark :: getStartAddr(){
     return startAddr;
@@ -91,6 +96,7 @@ void printStringVect ( vector <string> v){
     cout << "\n";
 }
 
+//Function to separate string into individual word
 vector <string> sepLine (  string str){
     vector <string> answer;
 
@@ -112,6 +118,8 @@ vector <string> sepLine (  string str){
 
     return answer;
 }
+//----------------------------------------------
+//Function to create benchmark data structure-----------------------------
 Benchmark createBenchmark(string fileName, InstCollection instCollection){
     Benchmark B; 
     int pc;
@@ -203,3 +211,4 @@ Benchmark createBenchmark(string fileName, InstCollection instCollection){
     ip.close();
     return B;
 }
+//--------------------------------------------------------------------------------

@@ -18,11 +18,13 @@ int Memory :: getValue(int addr){
 
 }
 
+//Creating memory. 64 entry with value set to 0
 void Memory :: createMem(){
     for (int i=0; i<64; i++){
         add(i,0);
     }
 }
+//---------------------------------------------
 
 void Memory :: print(){
     map <int, int> :: iterator itr;

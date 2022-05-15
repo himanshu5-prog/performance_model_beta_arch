@@ -32,7 +32,8 @@ struct Instruction
 
 
 };
-
+//-----------------------------------------------------------
+//Class for instruction collection-------------------------
 class InstCollection {
     map <string, Instruction> inst;
     

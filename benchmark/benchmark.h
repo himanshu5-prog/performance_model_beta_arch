@@ -37,6 +37,7 @@ class BenchElem {
         benchStruct getBenchStruct();
 };
 
+//Benchmark class-----------------------------------------------------
 class Benchmark {
     map <int, BenchElem> benchmark;
     int startAddr;
@@ -52,6 +53,8 @@ class Benchmark {
         benchStruct getBenchStruct(int pc);
         BenchElem getBenchElem (int pc);
 };
-
+//--------------------------------------------------------------------
+//Function to create benchmark----------------------------------------
 Benchmark createBenchmark ( string fileName, InstCollection instList);
+//--------------------------------------------------------------------
 #endif

@@ -36,6 +36,7 @@ void InstCollection :: print(){
     cout << "Total instructions: " << inst.size() << "\n";
 }
 
+//Function to add instruction------------------------
 InstCollection createInstructionList(){
     InstCollection instructionList;
     
